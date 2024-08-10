@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BeeGPT Chatbot</title>
+
+    <!-- Importing Lato Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap" rel="stylesheet">
+
+    <!-- Favicon -->
+    <link rel="icon" href="static/pictures/beeicon.png" type="image/png">
+
+    <style>
+        /* Dark Theme Color Palette */
+        :root {
+            --primary-color: #FF6F3C; /* Orange */
+            --secondary-color: #FF6F3C; /* Orange */
+            --accent-color: #FF6F3C; /* Orange */
+            --background-color: #121212; /* Dark Background */
+            --container-bg-color: #1E1E1E; /* Dark Container Background */
+            --text-color: #E0E0E0; /* Light Text Color */
+            --input-bg-color: #2C2C2C; /* Dark Input Background */
+            --input-text-color: #E0E0E0; /* Light Input Text Color */
+        }
+
+        /* Apply the custom cursor to all elements */
+        * {
+            cursor: url('static/pictures/beepointer.png'), auto; /* Custom Bee Pointer */
+        }
+
+        body {
+            font-family: 'Lato', sans-serif; /* Applied Lato font to all text types */
+            background-color: var(--background-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            position: relative;
+        }
+
+        .container {
+            background: var(--container-bg-color);
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            max-width: 400px;
+            width: 100%;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .container img {
+            width: 150px;
+            height: auto;
+            margin-bottom: 10px;
+        }
+
+        h1 {
+            font-size: 48px;
+            margin-top: 0px;
+            margin-bottom: 20px;
+            color: var(--primary-color);
+            font-weight: 700;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        textarea {
+            padding: 10px;
+            font-size: 16px;
+            border-radius: 4px;
+            border: 1px solid var(--primary-color);
+            margin-bottom: 10px;
+            background-color: var(--input-bg-color);
+            color: var(--input-text-color);
+            resize: vertical;
+            height: 100px;
+            min-height: 100px;
+            max-height: 300px;
+            font-family: 'Lato', sans-serif;
+        }
+
+        input[type="submit"] {
+            background-color: var(--secondary-color);
+            color: var(--container-bg-color);
+            padding: 10px;
+            font-size: 16px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            font-family: 'Lato', sans-serif;
+            font-weight: 700;
+            width: 100%;
+            margin-bottom: 10px;
+        }
+
+        input[type="submit"]:hover {
+            background-color: var(--accent-color);
+        }
+
+        .response {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: var(--primary-color);
+            border-radius: 4px;
+            text-align: left;
+            font-size: 14px;
+            color: var(--background-color);
+            font-family: 'Lato', sans-serif;
+        }
+
+        .error {
+            color: var(--secondary-color);
+            margin-top: 20px;
+            font-size: 14px;
+            font-family: 'Lato', sans-serif;
+        }
+
+        /* Position the Music On button in the top-right corner */
+        #play-button {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background-color: var(--primary-color);
+            color: var(--background-color);
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-family: 'Lato', sans-serif;
+            font-weight: 700;
+            transition: background-color 0.3s ease;
+        }
+
+        #play-button:hover {
+            background-color: var(--accent-color);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <img src="static/pictures/beeicon.png" alt="Bee Icon">
+        <h1>BeeGPT</h1>
+
+        <!-- Audio Element for Background Music -->
+        <audio id="beehive-audio" loop>
+            <source src="static/audio/beehive.mp3" type="audio/mpeg">
+            <source src="static/audio/beehive.ogg" type="audio/ogg">
+            Your browser does not support the audio element.
+        </audio>
+
+        <!-- Audio Element for Click Sound -->
+        <audio id="beeclick-audio">
+            <source src="static/audio/beeclick.mp3" type="audio/mpeg">
+        </audio>
+
+        <form method="POST">
+            <textarea id="message" name="message" placeholder="Ask me anything about bees..." required></textarea>
+            <input type="submit" value="Sting!" id="sting-button">
+        </form>
+
+        {% if chatgpt_response %}
+            <div class="response">
+                <strong>BeeGPT's Response:</strong>
+                <p>{{ chatgpt_response }}</p>
+            </div>
+        {% endif %}
+
+        {% if error_message %}
+            <div class="error">
+                <strong>Error:</strong>
+                <p>{{ error_message }}</p>
+            </div>
+        {% endif %}
+    </div>
+
+    <!-- Play Button to Start the Background Music -->
+    <button id="play-button">Music On</button>
+
+    <!-- JavaScript to Handle Audio Playback -->
+    <script>
+        document.getElementById('play-button').addEventListener('click', function() {
+            var audio = document.getElementById('beehive-audio');
+            audio.play();
+        });
+
+        document.getElementById('sting-button').addEventListener('click', function() {
+            var clickAudio = document.getElementById('beeclick-audio');
+            clickAudio.play();
+        });
+    </script>
+</body>
+</html>
