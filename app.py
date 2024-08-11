@@ -51,7 +51,8 @@ def home():
                                 "content": "You are BeeGPT. You are a specialized assistant."
                             },
                             {"role": "user", "content": user_message}
-                        ]
+                        ],
+                        "max_tokens": 1000  # Adjusted for an approximate max of 2500 characters
                     },
                     headers={
                         "Authorization": f"Bearer {openai.api_key}",
@@ -61,7 +62,11 @@ def home():
                 
                 if response.status_code == 200:
                     chatgpt_response = response.json()['choices'][0]['message']['content']
-                    return render_template("index.html", user_message=user_message, chatgpt_response=chatgpt_response)
+                    response_trimmed = False
+                    if len(chatgpt_response) > 2500:
+                        chatgpt_response = chatgpt_response[:2500]
+                        response_trimmed = True
+                    return render_template("index.html", user_message=user_message, chatgpt_response=chatgpt_response, response_trimmed=response_trimmed)
                 else:
                     error_message = f"Error: {response.status_code}, {response.text}"
                     return render_template("index.html", error_message=error_message)

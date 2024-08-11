@@ -22,6 +22,9 @@
             --text-color: #E0E0E0; /* Light Text Color */
             --input-bg-color: #2C2C2C; /* Dark Input Background */
             --input-text-color: #E0E0E0; /* Light Input Text Color */
+            --scrollbar-color: #FF6F3C; /* Scrollbar Color */
+            --scrollbar-bg-color: #1E1E1E; /* Scrollbar Background */
+            --warning-color: #FF0000; /* Warning Color */
         }
 
         /* Apply the custom cursor to all elements */
@@ -29,6 +32,7 @@
             cursor: url('static/pictures/beepointer.png'), auto; /* Custom Bee Pointer */
         }
 
+        /* Custom Scrollbar for the Whole Page */
         body {
             font-family: 'Lato', sans-serif; /* Applied Lato font to all text types */
             background-color: var(--background-color);
@@ -37,38 +41,36 @@
             padding: 0;
             display: flex;
             justify-content: center;
-            align-items: center;
-            height: 100vh;
+            align-items: flex-start;
+            min-height: 100vh;
             position: relative;
+            overflow-y: auto; /* Enable scrolling on the page */
+            scrollbar-width: thin; /* Firefox */
+            scrollbar-color: var(--scrollbar-color) var(--scrollbar-bg-color); /* Firefox */
         }
 
-        .container {
-            background: var(--container-bg-color);
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-            max-width: 400px;
-            width: 100%;
-            padding: 20px;
-            text-align: center;
+        /* Custom Scrollbar Design for WebKit */
+        body::-webkit-scrollbar {
+            width: 10px; /* Adjust scrollbar width */
         }
 
-        .container img {
-            width: 150px;
-            height: auto;
-            margin-bottom: 10px;
+        body::-webkit-scrollbar-track {
+            background-color: var(--scrollbar-bg-color);
+            border-radius: 5px;
         }
 
-        h1 {
-            font-size: 48px;
-            margin-top: 0px;
-            margin-bottom: 20px;
-            color: var(--primary-color);
-            font-weight: 700;
+        body::-webkit-scrollbar-thumb {
+            background-color: var(--scrollbar-color);
+            border-radius: 5px;
+            border: 2px solid var(--scrollbar-bg-color);
         }
 
-        form {
-            display: flex;
-            flex-direction: column;
+        body::-webkit-scrollbar-thumb:hover {
+            background-color: #FFA060;
+        }
+
+        body::-webkit-scrollbar-button {
+            display: none; /* Remove arrows */
         }
 
         textarea {
@@ -79,11 +81,73 @@
             margin-bottom: 10px;
             background-color: var(--input-bg-color);
             color: var(--input-text-color);
-            resize: vertical;
-            height: 100px;
-            min-height: 100px;
-            max-height: 300px;
+            height: 150px;
             font-family: 'Lato', sans-serif;
+            overflow-y: auto; /* Enable scrollbar within textarea */
+            outline: none; /* Remove default outline */
+            resize: none; /* Disable resizing */
+            scrollbar-width: thin; /* Firefox */
+            scrollbar-color: var(--scrollbar-color) var(--scrollbar-bg-color); /* Firefox */
+        }
+
+        /* Custom Scrollbar Design for WebKit within Textarea */
+        textarea::-webkit-scrollbar {
+            width: 10px; /* Adjust scrollbar width */
+        }
+
+        textarea::-webkit-scrollbar-track {
+            background-color: var(--scrollbar-bg-color);
+            border-radius: 5px;
+        }
+
+        textarea::-webkit-scrollbar-thumb {
+            background-color: var(--scrollbar-color);
+            border-radius: 5px;
+            border: 2px solid var(--scrollbar-bg-color);
+        }
+
+        textarea::-webkit-scrollbar-thumb:hover {
+            background-color: #FFA060;
+        }
+
+        textarea::-webkit-scrollbar-button {
+            display: none; /* Remove arrows */
+        }
+
+        .container {
+            background: var(--container-bg-color);
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            max-width: 500px; /* Restored max-width */
+            width: 100%;
+            padding: 20px;
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        .container img {
+            width: 150px; /* Restored width */
+            height: auto;
+            margin-bottom: 10px;
+        }
+
+        h1 {
+            font-size: 48px; /* Restored font size */
+            margin: 0 0 20px 0;
+            color: var(--primary-color);
+            font-weight: 700;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .char-counter {
+            font-size: 14px;
+            text-align: right;
+            color: var(--text-color);
+            margin-bottom: 10px;
         }
 
         input[type="submit"] {
@@ -105,27 +169,26 @@
             background-color: var(--accent-color);
         }
 
-        .response {
+        .response, .error {
             margin-top: 20px;
             padding: 15px;
-            background-color: var(--primary-color);
             border-radius: 4px;
-            text-align: left;
             font-size: 14px;
-            color: var(--background-color);
             font-family: 'Lato', sans-serif;
+        }
+
+        .response {
+            background-color: var(--primary-color);
+            color: var(--background-color);
+            text-align: left;
         }
 
         .error {
             color: var(--secondary-color);
-            margin-top: 20px;
-            font-size: 14px;
-            font-family: 'Lato', sans-serif;
         }
 
-        /* Position the Music On button in the top-right corner */
         #play-button {
-            position: absolute;
+            position: fixed;
             top: 20px;
             right: 20px;
             background-color: var(--primary-color);
@@ -142,6 +205,65 @@
 
         #play-button:hover {
             background-color: var(--accent-color);
+        }
+
+        /* Popup Styling */
+        .popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: var(--container-bg-color);
+            color: var(--text-color);
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            z-index: 1000;
+            max-width: 90%; /* Ensure it fits on smaller screens */
+            box-sizing: border-box; /* Ensure padding is included in width */
+        }
+
+        .popup button {
+            background-color: var(--primary-color);
+            color: var(--background-color);
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-family: 'Lato', sans-serif;
+            font-weight: 700;
+            transition: background-color 0.3s ease;
+        }
+
+        .popup button:hover {
+            background-color: var(--accent-color);
+        }
+
+        /* Media Queries for Mobile Responsiveness */
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 36px; /* Adjusted font size for small screens */
+            }
+
+            .container {
+                padding: 10px; /* Reduced padding for smaller screens */
+                margin: 10px; /* Reduced margin for smaller screens */
+            }
+
+            textarea {
+                font-size: 14px; /* Smaller font size for smaller screens */
+            }
+
+            input[type="submit"] {
+                font-size: 14px; /* Smaller font size for smaller screens */
+                padding: 8px; /* Reduced padding for smaller screens */
+            }
+
+            #play-button {
+                font-size: 14px; /* Smaller font size for smaller screens */
+                padding: 8px 16px; /* Reduced padding for smaller screens */
+            }
         }
     </style>
 </head>
@@ -164,13 +286,14 @@
 
         <form method="POST">
             <textarea id="message" name="message" placeholder="Ask me anything about bees..." required></textarea>
+            <div class="char-counter" id="char-counter">550 characters remaining</div>
             <input type="submit" value="Sting!" id="sting-button">
         </form>
 
         {% if chatgpt_response %}
             <div class="response">
                 <strong>BeeGPT's Response:</strong>
-                <p>{{ chatgpt_response }}</p>
+                <p>{{ chatgpt_response | safe }}</p>
             </div>
         {% endif %}
 
@@ -180,12 +303,24 @@
                 <p>{{ error_message }}</p>
             </div>
         {% endif %}
+
+        <!-- Popup for character limit warning -->
+        <div id="popup" class="popup">
+            <p>You have reached the maximum character limit of 550.</p>
+            <button id="close-popup">Okay</button>
+        </div>
+
+        <!-- Popup for response length warning -->
+        <div id="response-popup" class="popup">
+            <p>The BeeGPT response has been limited to 2500 characters.</p>
+            <button id="close-response-popup">Okay</button>
+        </div>
     </div>
 
     <!-- Play Button to Start the Background Music -->
     <button id="play-button">Music On</button>
 
-    <!-- JavaScript to Handle Audio Playback -->
+    <!-- JavaScript to Handle Audio Playback, Enter Key Submission, and Character Limit -->
     <script>
         document.getElementById('play-button').addEventListener('click', function() {
             var audio = document.getElementById('beehive-audio');
@@ -196,6 +331,52 @@
             var clickAudio = document.getElementById('beeclick-audio');
             clickAudio.play();
         });
+
+        // Trigger form submission when Enter key is pressed in the textarea
+        document.getElementById('message').addEventListener('keypress', function(event) {
+            if (event.key === 'Enter') {
+                event.preventDefault(); // Prevent the default newline behavior in the textarea
+                document.getElementById('sting-button').click(); // Trigger the Sting button click
+            }
+        });
+
+        // Restrict character input to 550 and show popup when limit is reached
+        document.getElementById('message').addEventListener('input', function(event) {
+            var textarea = event.target;
+            var maxLength = 550;
+            var charCounter = document.getElementById('char-counter');
+            var remainingChars = maxLength - textarea.value.length;
+
+            if (remainingChars < 0) {
+                textarea.value = textarea.value.slice(0, maxLength);
+                remainingChars = 0;
+                showPopup('popup');
+            }
+
+            charCounter.textContent = remainingChars + ' characters remaining';
+
+            // Change color if limit is reached
+            charCounter.style.color = remainingChars <= 0 ? 'var(--warning-color)' : 'var(--text-color)';
+        });
+
+        function showPopup(popupId) {
+            var popup = document.getElementById(popupId);
+            popup.style.display = 'block';
+
+            document.getElementById('close-' + popupId).addEventListener('click', function() {
+                popup.style.display = 'none';
+            }, { once: true });
+        }
+
+        // Show and close the response limit popup
+        document.getElementById('close-response-popup').addEventListener('click', function() {
+            document.getElementById('response-popup').style.display = 'none';
+        });
+
+        // If response is trimmed, show the popup
+        {% if response_trimmed %}
+        showPopup('response-popup');
+        {% endif %}
     </script>
 </body>
 </html>
