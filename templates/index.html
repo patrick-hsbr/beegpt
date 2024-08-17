@@ -9,22 +9,23 @@
     <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap" rel="stylesheet">
 
     <!-- Favicon -->
-    <link rel="icon" href="static/pictures/beeicon.png" type="image/png">
+    <link rel="icon" href="static/pictures/beefav.png" type="image/png">
 
     <style>
         /* Dark Theme Color Palette */
         :root {
-            --primary-color: #FF6F3C; /* Orange */
-            --secondary-color: #FF6F3C; /* Orange */
-            --accent-color: #FF6F3C; /* Orange */
-            --background-color: #121212; /* Dark Background */
-            --container-bg-color: #1E1E1E; /* Dark Container Background */
-            --text-color: #E0E0E0; /* Light Text Color */
-            --input-bg-color: #2C2C2C; /* Dark Input Background */
-            --input-text-color: #E0E0E0; /* Light Input Text Color */
-            --scrollbar-color: #FF6F3C; /* Scrollbar Color */
-            --scrollbar-bg-color: #1E1E1E; /* Scrollbar Background */
-            --warning-color: #FF0000; /* Warning Color */
+            --primary-color: #ff5252; /* Comic button red */
+            --secondary-color: #ff5252; /* Comic button red */
+            --accent-color: #fcf414; /* Comic button yellow */
+            --background-color: #ffffff; /* Background */
+            --container-bg-color: rgba(255, 255, 255, 0.6); /* Slightly decreased transparency */
+            --text-color: #ff5252; /* Text Color (updated) */
+            --input-bg-color: #ff5252; /* Input Background */
+            --input-text-color: #ffffff; /* Input Text Color */
+            --scrollbar-color: #ff5252; /* Scrollbar Color */
+            --scrollbar-bg-color: #1e1e1e; /* Scrollbar Background */
+            --warning-color: #ffffff; /* Warning Color updated to white */
+            --border-color: #000000; /* Border Color */
         }
 
         /* Apply the custom cursor to all elements */
@@ -32,53 +33,29 @@
             cursor: url('static/pictures/beepointer.png'), auto; /* Custom Bee Pointer */
         }
 
-        /* Custom Scrollbar for the Whole Page */
         body {
             font-family: 'Lato', sans-serif; /* Applied Lato font to all text types */
-            background-color: var(--background-color);
+            background: url('static/pictures/flowers.jpeg') no-repeat center center fixed; /* Background Image */
+            background-size: cover;
             color: var(--text-color);
             margin: 0;
-            padding: 0;
+            padding: 0 10px; /* Add slight padding on left and right sides */
             display: flex;
+            flex-direction: column;
             justify-content: center;
-            align-items: flex-start;
+            align-items: center; /* Centered vertically */
             min-height: 100vh;
             position: relative;
             overflow-y: auto; /* Enable scrolling on the page */
-            scrollbar-width: thin; /* Firefox */
-            scrollbar-color: var(--scrollbar-color) var(--scrollbar-bg-color); /* Firefox */
-        }
-
-        /* Custom Scrollbar Design for WebKit */
-        body::-webkit-scrollbar {
-            width: 10px; /* Adjust scrollbar width */
-        }
-
-        body::-webkit-scrollbar-track {
-            background-color: var(--scrollbar-bg-color);
-            border-radius: 5px;
-        }
-
-        body::-webkit-scrollbar-thumb {
-            background-color: var(--scrollbar-color);
-            border-radius: 5px;
-            border: 2px solid var(--scrollbar-bg-color);
-        }
-
-        body::-webkit-scrollbar-thumb:hover {
-            background-color: #FFA060;
-        }
-
-        body::-webkit-scrollbar-button {
-            display: none; /* Remove arrows */
+            background-color: transparent; /* Make the body background transparent */
         }
 
         textarea {
             padding: 10px;
             font-size: 16px;
             border-radius: 4px;
-            border: 1px solid var(--primary-color);
-            margin-bottom: 10px;
+            border: 1px solid var(--border-color); /* Thin frame around the textarea */
+            margin-bottom: 5px;
             background-color: var(--input-bg-color);
             color: var(--input-text-color);
             height: 150px;
@@ -86,87 +63,83 @@
             overflow-y: auto; /* Enable scrollbar within textarea */
             outline: none; /* Remove default outline */
             resize: none; /* Disable resizing */
-            scrollbar-width: thin; /* Firefox */
-            scrollbar-color: var(--scrollbar-color) var(--scrollbar-bg-color); /* Firefox */
+            box-shadow: 5px 5px 0px #000; /* Shadow on the right and bottom */
         }
 
-        /* Custom Scrollbar Design for WebKit within Textarea */
-        textarea::-webkit-scrollbar {
-            width: 10px; /* Adjust scrollbar width */
-        }
-
-        textarea::-webkit-scrollbar-track {
-            background-color: var(--scrollbar-bg-color);
-            border-radius: 5px;
-        }
-
-        textarea::-webkit-scrollbar-thumb {
-            background-color: var(--scrollbar-color);
-            border-radius: 5px;
-            border: 2px solid var(--scrollbar-bg-color);
-        }
-
-        textarea::-webkit-scrollbar-thumb:hover {
-            background-color: #FFA060;
-        }
-
-        textarea::-webkit-scrollbar-button {
-            display: none; /* Remove arrows */
+        /* Placeholder text color */
+        textarea::placeholder {
+            color: white;
+            opacity: 1; /* Ensures the color is not affected by the default opacity */
         }
 
         .container {
-            background: var(--container-bg-color);
+            background: var(--container-bg-color); /* Slightly decreased transparency */
             border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-            max-width: 500px; /* Restored max-width */
+            border: 1px solid var(--border-color); /* Thin frame around the container */
+            box-shadow: 5px 5px 0px #000; /* Shadow on the right and bottom */
+            max-width: 500px;
             width: 100%;
             padding: 20px;
-            margin: 20px 0;
+            margin: 0; /* Removed margin to help center */
             text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
         }
 
         .container img {
-            width: 150px; /* Restored width */
+            width: 150px;
             height: auto;
-            margin-bottom: 10px;
+            margin-bottom: 0px;
         }
 
         h1 {
-            font-size: 48px; /* Restored font size */
-            margin: 0 0 20px 0;
-            color: var(--primary-color);
-            font-weight: 700;
+            color: var(--text-color);
+            font-size: 48px;
+            margin: 0px 0;
         }
 
         form {
             display: flex;
             flex-direction: column;
+            width: 100%;
         }
 
         .char-counter {
             font-size: 14px;
             text-align: right;
-            color: var(--text-color);
+            color: #000000; /* Updated to black */
             margin-bottom: 10px;
         }
 
-        input[type="submit"] {
-            background-color: var(--secondary-color);
-            color: var(--container-bg-color);
-            padding: 10px;
-            font-size: 16px;
-            border: none;
-            border-radius: 4px;
+        .comic-button {
+            display: inline-block;
+            padding: 8px 16px; /* Decreased size of buttons */
+            font-size: 18px; /* Reduced font size */
+            font-weight: bold;
+            text-align: center;
+            text-decoration: none;
+            color: #fff;
+            background-color: var(--primary-color);
+            border: 2px solid #000;
+            border-radius: 10px;
+            box-shadow: 5px 5px 0px #000;
+            transition: all 0.3s ease;
             cursor: pointer;
-            transition: background-color 0.3s ease;
-            font-family: 'Lato', sans-serif;
-            font-weight: 700;
-            width: 100%;
-            margin-bottom: 10px;
         }
 
-        input[type="submit"]:hover {
+        .comic-button:hover {
+            background-color: #fff;
+            color: var(--primary-color);
+            border: 2px solid var(--primary-color);
+            box-shadow: 5px 5px 0px var(--primary-color);
+        }
+
+        .comic-button:active {
             background-color: var(--accent-color);
+            box-shadow: none;
+            transform: translateY(4px);
         }
 
         .response, .error {
@@ -192,19 +165,29 @@
             top: 20px;
             right: 20px;
             background-color: var(--primary-color);
-            color: var(--background-color);
+            color: #fff;
             padding: 10px 20px;
-            font-size: 16px;
-            border: none;
-            border-radius: 4px;
+            font-size: 16px; /* Adjusted font size for consistency */
+            border: 2px solid #000;
+            border-radius: 10px;
+            box-shadow: 5px 5px 0px #000;
             cursor: pointer;
             font-family: 'Lato', sans-serif;
             font-weight: 700;
-            transition: background-color 0.3s ease;
+            transition: all 0.3s ease;
         }
 
         #play-button:hover {
+            background-color: #fff;
+            color: var(--primary-color);
+            border: 2px solid var(--primary-color);
+            box-shadow: 5px 5px 0px var(--primary-color);
+        }
+
+        #play-button:active {
             background-color: var(--accent-color);
+            box-shadow: none;
+            transform: translateY(4px);
         }
 
         /* Popup Styling */
@@ -214,11 +197,12 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            background-color: var(--container-bg-color);
-            color: var(--text-color);
+            background-color: #ffffff; /* Made non-transparent */
+            color: var(--primary-color); /* Changed to primary color */
             padding: 20px;
             border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            border: 1px solid var(--border-color); /* Thin frame around the popup */
+            box-shadow: 5px 5px 0px #000; /* Shadow on the right and bottom */
             z-index: 1000;
             max-width: 90%; /* Ensure it fits on smaller screens */
             box-sizing: border-box; /* Ensure padding is included in width */
@@ -227,50 +211,48 @@
         .popup button {
             background-color: var(--primary-color);
             color: var(--background-color);
-            padding: 10px 20px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
+            padding: 8px 16px; /* Decreased size of buttons */
+            font-size: 18px; /* Reduced font size */
+            border: 2px solid #000;
+            border-radius: 10px;
+            box-shadow: 5px 5px 0px #000;
             font-family: 'Lato', sans-serif;
             font-weight: 700;
-            transition: background-color 0.3s ease;
+            transition: all 0.3s ease;
+            cursor: pointer;
         }
 
         .popup button:hover {
+            background-color: #fff;
+            color: var(--primary-color);
+            border: 2px solid var(--primary-color);
+            box-shadow: 5px 5px 0px var(--primary-color);
+        }
+
+        .popup button:active {
             background-color: var(--accent-color);
+            box-shadow: none;
+            transform: translateY(4px);
+        }
+
+        /* Footer inside the container */
+        .footer {
+            margin-top: 20px;
+            font-size: 14px;
+            color: #000000; /* Updated to black */
         }
 
         /* Media Queries for Mobile Responsiveness */
         @media (max-width: 600px) {
-            h1 {
-                font-size: 36px; /* Adjusted font size for small screens */
-            }
-
             .container {
-                padding: 10px; /* Reduced padding for smaller screens */
-                margin: 10px; /* Reduced margin for smaller screens */
-            }
-
-            textarea {
-                font-size: 14px; /* Smaller font size for smaller screens */
-            }
-
-            input[type="submit"] {
-                font-size: 14px; /* Smaller font size for smaller screens */
-                padding: 8px; /* Reduced padding for smaller screens */
-            }
-
-            #play-button {
-                font-size: 14px; /* Smaller font size for smaller screens */
-                padding: 8px 16px; /* Reduced padding for smaller screens */
+                padding: 20px 15px; /* Add padding on smaller screens */
             }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <img src="static/pictures/beeicon.png" alt="Bee Icon">
-        <h1>BeeGPT</h1>
+        <img src="static/pictures/beelogo.png" alt="Bee Icon">
 
         <!-- Audio Element for Background Music -->
         <audio id="beehive-audio" loop>
@@ -287,7 +269,7 @@
         <form method="POST">
             <textarea id="message" name="message" placeholder="Ask me anything about bees..." required></textarea>
             <div class="char-counter" id="char-counter">550 characters remaining</div>
-            <input type="submit" value="Sting!" id="sting-button">
+            <input type="submit" value="Sting!" id="sting-button" class="comic-button">
         </form>
 
         {% if chatgpt_response %}
@@ -304,21 +286,23 @@
             </div>
         {% endif %}
 
-        <!-- Popup for character limit warning -->
         <div id="popup" class="popup">
             <p>You have reached the maximum character limit of 550.</p>
-            <button id="close-popup">Okay</button>
+            <button id="close-popup" class="comic-button">Okay</button>
         </div>
 
-        <!-- Popup for response length warning -->
         <div id="response-popup" class="popup">
             <p>The BeeGPT response has been limited to 2500 characters.</p>
-            <button id="close-response-popup">Okay</button>
+            <button id="close-response-popup" class="comic-button">Okay</button>
+        </div>
+
+        <div class="footer">
+            &copy; 2024 BeeGPT
         </div>
     </div>
 
     <!-- Play Button to Start the Background Music -->
-    <button id="play-button">Music On</button>
+    <button id="play-button" class="comic-button">Music On</button>
 
     <!-- JavaScript to Handle Audio Playback, Enter Key Submission, and Character Limit -->
     <script>
@@ -356,7 +340,7 @@
             charCounter.textContent = remainingChars + ' characters remaining';
 
             // Change color if limit is reached
-            charCounter.style.color = remainingChars <= 0 ? 'var(--warning-color)' : 'var(--text-color)';
+            charCounter.style.color = '#000000'; /* Updated to black */
         });
 
         function showPopup(popupId) {
