@@ -30,6 +30,8 @@
             --scrollbar-bg-color: #1e1e1e; /* Scrollbar Background */
             --warning-color: #ffffff; /* Warning Color updated to white */
             --border-color: #000000; /* Border Color */
+            --hover-bg-color: #ffffff; /* Button hover background color */
+            --hover-text-color: #ff5252; /* Button hover text color */
         }
 
         /* Apply the custom cursor to all elements */
@@ -134,8 +136,8 @@
         }
 
         .comic-button:hover {
-            background-color: #fff;
-            color: var(--primary-color);
+            background-color: var(--hover-bg-color);
+            color: var(--hover-text-color);
             border: 2px solid var(--primary-color);
             box-shadow: 5px 5px 0px var(--primary-color);
         }
@@ -146,21 +148,28 @@
             transform: translateY(4px);
         }
 
-        .response, .error {
+        /* Response Box Styling to Match the Button Hover Style */
+        .response {
+            background-color: var(--hover-bg-color);
+            color: var(--hover-text-color);
+            text-align: left;
+            padding: 10px; /* Match padding of textarea */
+            font-size: 16px; /* Match font size of textarea */
+            border-radius: 10px; /* Match border radius of buttons */
+            border: 2px solid var(--primary-color); /* Match border of buttons */
+            box-shadow: 5px 5px 0px var(--primary-color); /* Match shadow of buttons */
+            margin-top: 20px;
+            font-family: 'Lato', sans-serif; /* Match font family of textarea */
+            min-width: 100%; /* Ensure it fits within the container */
+            box-sizing: border-box; /* Include padding in width */
+        }
+
+        .error {
             margin-top: 20px;
             padding: 15px;
             border-radius: 4px;
             font-size: 14px;
             font-family: 'Lato', sans-serif;
-        }
-
-        .response {
-            background-color: var(--primary-color);
-            color: var(--background-color);
-            text-align: left;
-        }
-
-        .error {
             color: var(--secondary-color);
         }
 
@@ -182,8 +191,8 @@
         }
 
         #play-button:hover {
-            background-color: #fff;
-            color: var(--primary-color);
+            background-color: var(--hover-bg-color);
+            color: var(--hover-text-color);
             border: 2px solid var(--primary-color);
             box-shadow: 5px 5px 0px var(--primary-color);
         }
@@ -227,8 +236,8 @@
         }
 
         .popup button:hover {
-            background-color: #fff;
-            color: var(--primary-color);
+            background-color: var(--hover-bg-color);
+            color: var(--hover-text-color);
             border: 2px solid var(--primary-color);
             box-shadow: 5px 5px 0px var(--primary-color);
         }
@@ -250,6 +259,10 @@
         @media (max-width: 600px) {
             .container {
                 padding: 20px 15px; /* Add padding on smaller screens */
+            }
+
+            .response {
+                min-width: 100%; /* Ensure the response box is responsive on smaller screens */
             }
         }
     </style>
@@ -343,6 +356,20 @@
              (adsbygoogle = window.adsbygoogle || []).push({});
         </script>
     </div>
+
+    <!-- Advertisement Script -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5254751950420611"
+     crossorigin="anonymous"></script>
+    <!-- Advertisement -->
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-5254751950420611"
+         data-ad-slot="9404190331"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>
+         (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
 
     <!-- Play Button to Start the Background Music -->
     <button id="play-button" class="comic-button">Music On</button>
